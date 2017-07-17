@@ -127,6 +127,7 @@ In order to connect your Customers API to 3scale, you need to follow three simpl
 1. Configure API access policy and application plans.
 1. Integrate your API with 3scale using the API gateway in the staging environment (for development only).
 
+
 #### Step 1: Deploy APIcast using the OpenShift template
 
 1. By default you are logged in as *developer* and can proceed to the next step.
@@ -153,7 +154,7 @@ In order to connect your Customers API to 3scale, you need to follow three simpl
 
     Ignore the suggested next steps in the text output at the command prompt and proceed to the next step below.
 
-1. Login into the Admin Portal:
+1. Login into the 3scale Admin Portal:
 
     ![01-login.png](./img/01-login.png)
 
@@ -225,6 +226,7 @@ In order to connect your Customers API to 3scale, you need to follow three simpl
 
     If you wish to see the APIcast logs, you can do so by clicking **Applications > Pods**, selecting one of the pods and finally selecting **Logs**.
 
+
 #### Step 2: Define your API
 
 Your 3scale Admin Portal (http://&lt;YOURDOMAIN&gt;-admin.3scale.net) provides access to a number of configuration features.
@@ -254,9 +256,10 @@ Your 3scale Admin Portal (http://&lt;YOURDOMAIN&gt;-admin.3scale.net) provides a
 
     ![06-configure-apicast.png](./img/06-configure-apicast.png)
 
+1. (Optional) If you get a message "Introducing a brand new APIcast", upgrade to the latest proxy by clicking on "Start using the latest APIcast".
 1. Click on the **add the Base URL of your API and save the configuration** button
 1. Fill in the information for accessing your API.
-The private Base URL is the camel servlet and default port `<HOST-SERVER-IP>:8080`, for example `172.17.0.1:8080`
+The private Base URL is the camel servlet and default port `<HOST-SERVER-IP>:8080`, for example `172.17.0.1:8080`.
 For this lab, we are going to use the route from the APIcast Gateway deployed on Openshift: `http://customer-api-staging-3scalegateway.<OPENSHIFT-SERVER-IP>.xip.io:8080` for staging and `http://customer-api-production-3scalegateway.<OPENSHIFT-SERVER-IP>.nip.io:8080` for production.
 
     ![07-baseurl-configuration.png](./img/07-baseurl-configuration.png)
@@ -266,6 +269,7 @@ For this lab, we are going to use the route from the APIcast Gateway deployed on
     ![08-update-staging.png](./img/08-update-staging.png)
 
 1. Success! Your 3scale access control layer will now only allow authenticated calls through to your backend API.
+
 
 #### Step 3: Configure your API access policies with application plans
 
