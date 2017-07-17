@@ -235,6 +235,8 @@ In 3scale terms, *applications* define the credentials to access your API. An ap
 
     Ignore the suggested next steps in the text output at the command prompt and proceed to the next step below.
 
+1. Log into 3scale
+
 1. Create a new Secret to reference your project by replacing and with yours.
 
     ```
