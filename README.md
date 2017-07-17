@@ -9,7 +9,7 @@ This very simple lab will guide you to create your very first Fuse SpringBoot pr
 ## Installation
 Before you begin, please make sure the following software are properly installed
 
-* JBoss Development Suite V1.3 (MacOX/Windows), sorry Linux users, you are on your own
+* JBoss Development Suite V1.3 (MacOX/Windows)
 	* JBoss Developer Studio 10.3.0.GA with Integration SOA plugin installed
 	https://developers.redhat.com/products/devsuite/download/
 	* Java Platform, Standard Edition 1.8.0.111
@@ -86,9 +86,9 @@ oc create -f https://raw.githubusercontent.com/openshift/origin/master/examples/
 log back in as developer
 
 ```
-oc login -u openshift-dev
+oc login -u developer
 Authentication required for https://10.1.2.2:8443 (openshift)
-Username: openshift-dev
+Username: developer
 Password: 
 Login successful.
 
@@ -105,7 +105,7 @@ Enter **https://10.1.2.2:8443** as the **Server** and click on the **retrieve** 
 
 ![05-token.png](./img/05-token.png)
 
-In the popup window, log in as Developer using ID/PWD openshift-del/devel. Select ok and check the **Save token** box.
+In the popup window, log in as Developer using ID/PWD developer/developer. Select ok and check the **Save token** box.
 
 ![06-connection.png](./img/06-connection.png)
 
