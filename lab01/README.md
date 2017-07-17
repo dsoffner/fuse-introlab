@@ -28,7 +28,7 @@ spring.datasource.platform = h2
 ```
 *note: we are using H2 in memory database for testing. And thanks to autowiring in SpringBoot, it is now automatically loaded and wired as the default datasource to the Camel context*
 
-Create a new file under *src/main/resources* by right click on the folder itself in the project explorer panel, select **New** -> **Others**
+Create new file under *src/main/resources* by right click on the folder itself in the project explorer panel, select **New** -> **Others**
 
 ![05-newfile.png](./img/05-newfile.png)
 
