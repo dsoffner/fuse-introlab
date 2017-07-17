@@ -29,8 +29,11 @@ Since we will be using MYSQL database, add the driver dependency in **pom.xml**
 </dependency>
 ```
 
+In Red Hat JBoss Developer Studio,open the OpenShift Explorer view by clicking on **Window -> Show View -> Other** and search for OpenShift Explorer to open it.
 
-In Red Hat JBoss Developer Studio, under OpenShift Explorer, right click on the connection that connects to current OpenShift, and create a new project. **NEW** -> **Project**
+Click on "New Connection Wizard" to connect to the local OpenShift instance. As Server type select "OpenShift 3". In the Server field enter your local OpenShift host, such as 'https://10.0.2.15:8443'. For Authentication, select 'Basic' with the user name 'developer' and the password 'developer'.
+
+Right click on the connection that connects to current OpenShift, and create a new project. **NEW** -> **Project**
 
 ![01-newproject.png](./img/01-newproject.png)
 
@@ -38,11 +41,11 @@ And create Project Name: **myfuseproject** with Display Namw: **My Fuse Project*
 
 ![02-projectname.png](./img/02-projectname.png)
 
-In side the project we are going to first create a MYSQL database for our appkication, right click on the new project name **myfuseproject** -> **New** -> **Application**
+Inside the project we are going to first create a MYSQL database for our application, right click on the new project name **myfuseproject** -> **New** -> **Application**
 
 ![03-newapp.png](./img/03-newapp.png)
 
-Under Server application source, select **mysql-ephemeral(database, mysql) - openshift** and click next.
+Under Server application source, select **mysql-ephemeral (database, mysql) - openshift** and click next.
 
 ![04-mysql.png](./img/04-mysql.png)
 
@@ -62,11 +65,11 @@ Now we can finally push our application to OpenShift by right click on your proj
 
 ![07-runmvn.png](./img/07-runmvn.png)
 
-In the pop-up menu, select **Deploy myfuselab on OpenShift** on the left panel. Go to  **JRE** tab on the right, inside VM arguments, update kuberenets.namespace to **myfuseproject** and username/password to **openshif-dev/devel**. And **RUN**.
+In the pop-up menu, select **Deploy myfuselab on OpenShift** on the left panel. Go to  **JRE** tab on the right, inside VM arguments, update the kubernetes.master to your OpenShift host name, update kuberenets.namespace to **myfuseproject** and username/password to **developer/developer**. And **RUN**.
 
 ![08-runconfig.png](./img/08-runconfig.png)
 
-To see everything running, in your browser, go to *https://10.1.2.2:8443/console* and login with **openshif-dev/devel**. Select **My Fuse Project**. And you will see both application in the overview page.
+To see everything running, in your browser, go to *https://10.1.2.2:8443/console* and login with **developer/developer**. Select **My Fuse Project**. And you will see both application in the overview page.
 
 ![09-overview.png](./img/09-overview.png)
 
@@ -80,18 +83,15 @@ Click on **Create route**.
 
 Don't change anything and hit Create.
 
-Access the API endpoint by going to following URL
+Access the API endpoint by going to following URL of your route and invoking the API, for example
 
 ```
 curl http://camel-ose-springboot-xml-sample.rhel-cdk.10.1.2.2.xip.io/myfuselab/customer/all
-curl  http://camel-ose-springboot-xml-sample.rhel-cdk.10.1.2.2.xip.io/myfuselab/customer/A01
 ```
 
 Verify that it is returning customer data in JSON format
 ```
 [{"CUSTOMERID":"A01","VIPSTATUS":"Diamond","BALANCE":1000},{"CUSTOMERID":"A02","VIPSTATUS":"Gold","BALANCE":500}]
-
-[{"CUSTOMERID":"A01","VIPSTATUS":"Diamond","BALANCE":1000}]
 ```
 To see the Camel route in action, in your OpenShift console, go to **Application** -> **pod** and select the first **camel-ose-springboot-xml-1-xxxxx** pod.
 
@@ -129,3 +129,13 @@ mysql> select * from customerdemo;
 +------------+-----------+---------+
 2 rows in set (0.00 sec)
 ```
+
+Now go back into the 3scale Admin Console and to your Customers API.
+
+In the "Integration" tab replace the "Private Base URL" with the URL of the route created earlier and port 8080, for example
+
+      http://camel-ose-springboot-xml-sample.rhel-cdk.10.1.2.2.xip.io:8080
+
+Then click on "Update the Staging Environment".
+
+Test the API invocation through the 3scale Staging Environment again. You should see the list of customers, this time coming from the OpenShift instance using the Fuse Integration Services instead of through JBoss Developer Studio.
