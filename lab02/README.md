@@ -129,7 +129,6 @@ In order to connect your Customers API to 3scale, you need to follow three simpl
 
 #### Step 1: Deploy APIcast using the OpenShift template
 
-
 1. By default you are logged in as *developer* and can proceed to the next step.
 
     Otherwise login into OpenShift using the `oc login` command from the OpenShift Client tools you downloaded and installed in the previous step. The default login credentials are *username = "developer"* and *password = "developer"*:
@@ -154,7 +153,11 @@ In order to connect your Customers API to 3scale, you need to follow three simpl
 
     Ignore the suggested next steps in the text output at the command prompt and proceed to the next step below.
 
-1. Log into 3scale and click on the Gear in the upper right corner. Then click on "Personal Settings" and "Token".
+1. Login into the Admin Portal:
+
+    ![01-login.png](./img/01-login.png)
+
+1. Click on the Gear in the upper right corner. Then click on "Personal Settings" and "Token".
 
    Under "Access Tokens" click on "Add Access Token".  Provide it with a name, click all three scopes and select "Read & Write" permission.
    
@@ -252,7 +255,9 @@ Your 3scale Admin Portal (http://&lt;YOURDOMAIN&gt;-admin.3scale.net) provides a
     ![06-configure-apicast.png](./img/06-configure-apicast.png)
 
 1. Click on the **add the Base URL of your API and save the configuration** button
-1. Fill in the information for accessing your API. The private Base URL is the camel servlet and default port `<HOST-SERVER-IP>:8080`. For this lab, we are going to use the route from the APIcast Gateway deployed on Openshift: `http://customer-api-staging.<OPENSHIFT-SERVER-IP>.nip.io:80` for staging and `http://customer-api-production.<OPENSHIFT-SERVER-IP>.nip.io:80` for production.
+1. Fill in the information for accessing your API.
+The private Base URL is the camel servlet and default port `<HOST-SERVER-IP>:8080`, for example `172.17.0.1:8080`
+For this lab, we are going to use the route from the APIcast Gateway deployed on Openshift: `http://customer-api-staging-3scalegateway.<OPENSHIFT-SERVER-IP>.xip.io:8080` for staging and `http://customer-api-production-3scalegateway.<OPENSHIFT-SERVER-IP>.nip.io:8080` for production.
 
     ![07-baseurl-configuration.png](./img/07-baseurl-configuration.png)
 
@@ -308,7 +313,7 @@ In 3scale terms, *applications* define the credentials to access your API. An ap
 1. Test that APIcast authorizes a valid call to your API, by executing a curl command with your valid *user_key* to the *hostname* that you configured in the previous step:
 
     ```
-    curl -i "http://customer-api-staging.<OPENSHIFT-SERVER-IP>.nip.io:80/myfuselab/customer/all?user_key=YOUR_USER_KEY" --insecure
+    curl -i "http://customer-api-staging.<OPENSHIFT-SERVER-IP>.nip.io:8080/myfuselab/customer/all?user_key=YOUR_USER_KEY" --insecure
     ```
     You should see the following messages:
 
